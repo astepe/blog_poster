@@ -527,3 +527,12 @@ JavaScript warning: https://www.googletagmanager.com/gtag/js?id=UA-91316635-1, l
 [Parent 4678, Gecko_IOThread] WARNING: pipe error (83): Connection reset by peer: file /build/firefox-4VfQCB/firefox-63.0+build2/ipc/chromium/src/chrome/common/ipc_channel_posix.cc, line 356
 [Parent 4678, Gecko_IOThread] WARNING: pipe error (77): Connection reset by peer: file /build/firefox-4VfQCB/firefox-63.0+build2/ipc/chromium/src/chrome/common/ipc_channel_posix.cc, line 356
 1541258296736	Marionette	INFO	Stopped listening on port 34759
+1541260431187	mozrunner::runner	INFO	Running command: "/usr/bin/firefox" "-marionette" "-foreground" "-no-remote" "-profile" "/tmp/rust_mozprofile.eBixjHY7KtHL"
+1541260433414	Marionette	INFO	Listening on port 43597
+1541260433498	Marionette	WARN	TLS certificate errors will be ignored for this session
+1541262086631	mozrunner::runner	INFO	Running command: "/usr/bin/firefox" "-marionette" "-foreground" "-no-remote" "-profile" "/tmp/rust_mozprofile.9m0Q17lu8bBx"
+1541262088898	Marionette	INFO	Listening on port 41313
+1541262088956	Marionette	WARN	TLS certificate errors will be ignored for this session
+1541262127938	mozrunner::runner	INFO	Running command: "/usr/bin/firefox" "-marionette" "-foreground" "-no-remote" "-profile" "/tmp/rust_mozprofile.e1M3yHWvGARr"
+1541262130167	Marionette	INFO	Listening on port 37925
+1541262130249	Marionette	WARN	TLS certificate errors will be ignored for this session
