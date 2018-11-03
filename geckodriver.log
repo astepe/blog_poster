@@ -536,3 +536,9 @@ JavaScript warning: https://www.googletagmanager.com/gtag/js?id=UA-91316635-1, l
 1541262127938	mozrunner::runner	INFO	Running command: "/usr/bin/firefox" "-marionette" "-foreground" "-no-remote" "-profile" "/tmp/rust_mozprofile.e1M3yHWvGARr"
 1541262130167	Marionette	INFO	Listening on port 37925
 1541262130249	Marionette	WARN	TLS certificate errors will be ignored for this session
+1541262317392	mozrunner::runner	INFO	Running command: "/usr/bin/firefox" "-marionette" "-foreground" "-no-remote" "-profile" "/tmp/rust_mozprofile.P3ZFAgXBHsed"
+1541262319683	Marionette	INFO	Listening on port 43519
+1541262319720	Marionette	WARN	TLS certificate errors will be ignored for this session
+1541262374292	mozrunner::runner	INFO	Running command: "/usr/bin/firefox" "-marionette" "-foreground" "-no-remote" "-profile" "/tmp/rust_mozprofile.aK9Mzt4fD3i7"
+1541262376581	Marionette	INFO	Listening on port 39543
+1541262376618	Marionette	WARN	TLS certificate errors will be ignored for this session

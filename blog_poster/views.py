@@ -32,12 +32,16 @@ class Login:
 
         self.username_label.pack()
         self.username_field.pack()
+        self.username_field.focus()
+
         self.password_label.pack()
         self.password_field.pack()
+        self.password_field.bind('<Return>', self.login)
+
         self.login_button.pack()
         self.frame.pack()
 
-    def login(self):
+    def login(self, event):
 
         username = self.username_field.get()
         password = self.password_field.get()
@@ -48,6 +52,7 @@ class Login:
 
             self.username_field.delete(0, END)
             self.password_field.delete(0, END)
+            self.username_field.focus()
             return None
 
         self.master.destroy()

@@ -1,7 +1,6 @@
 from selenium import webdriver
 from blog_poster.filters import blog_filter
 from blog_poster import jinja_env
-from html import unescape
 import os
 
 
