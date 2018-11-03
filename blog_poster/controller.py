@@ -1,9 +1,9 @@
 import os, json, requests, boto3
 from requests.auth import HTTPBasicAuth
 
-API_URL = 'https://ari-blog.herokuapp.com/api'
+#API_URL = 'https://ari-blog.herokuapp.com/api'
 #API_URL = 'http://127.0.0.1:5000/api'
-#API_URL = 'http://0.0.0.0:5000/api'
+API_URL = 'http://0.0.0.0:5000/api'
 
 class Api:
     """

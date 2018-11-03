@@ -3,7 +3,8 @@ from tkinter import filedialog, ttk
 from ttkthemes import themed_tk as tk
 from blog_poster.controller import Api
 from datetime import datetime
-import os
+import os, time
+from blog_poster.html_previewer import PreviewWindow
 
 BASEDIR = os.path.abspath(os.path.dirname(__file__))
 
@@ -150,13 +151,27 @@ class Edit:
         self.pic_label = ttk.Label(self.pic_frame, text='Image:', font='Courier')
         self.pic_field = ttk.Entry(self.pic_frame, font="Courier")
 
+
         # if editing a pre-existing post, populate text into fields
         if 'blogpost' in kwargs:
 
             self.blogpost = kwargs['blogpost']
+            self.html_preview = PreviewWindow(self.blogpost['body'])
             self.title_field.insert(0, self.blogpost['title'])
             self.body_field.insert(END, self.blogpost['body'])
             self.pic_field.insert(0, (self.blogpost['image']))
+        else:
+            self.html_preview = PreviewWindow()
+
+        def onclick(event):
+            event.widget.focus_set()
+
+        def keyrelease(event):
+            text = event.widget.get(1.0, END)
+            self.html_preview.update_preview(text)
+
+        self.body_field.bind("<KeyRelease>", keyrelease)
+        self.body_field.bind('<Button-1>', onclick)
 
         # create buttons
         self.button_frame = ttk.Frame(self.master)
