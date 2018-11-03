@@ -18,6 +18,7 @@ Blog Poster is a simple GUI that allows the user to create and edit blog posts o
 
 * [Tkinter](https://tkdocs.com/) - GUI library
 * [Boto3](https://boto3.amazonaws.com/v1/documentation/api/latest/index.html) - AWS S3 Bucket management
+* [Selenium](https://www.seleniumhq.org/) - blog post previewing
 
 ## Acknowledgments
 
