@@ -1,9 +1,9 @@
-import os, json, requests, boto3
+import os
+import json
+import requests
+import boto3
 from requests.auth import HTTPBasicAuth
 
-#API_URL = 'https://ari-blog.herokuapp.com/api'
-#API_URL = 'http://127.0.0.1:5000/api'
-API_URL = 'http://0.0.0.0:5000/api'
 
 class Api:
     """
@@ -12,8 +12,9 @@ class Api:
 
     def __init__(self, username, password):
 
-        response = requests.post(API_URL + '/tokens',
-                     auth=HTTPBasicAuth(username, password)).json()
+        self.API_URL = os.environ.get('API_URL')
+        response = requests.post(self.API_URL + '/tokens',
+                                 auth=HTTPBasicAuth(username, password)).json()
 
         if 'error' in response:
             self.token = None
@@ -26,14 +27,14 @@ class Api:
 
     def create_blogpost(self, title, body, **kwargs):
 
-        resource = API_URL + '/blogposts/create'
+        resource = self.API_URL + '/blogposts/create'
         payload = {'title': title, 'body': body}
 
         if 'image' in kwargs and os.path.exists(kwargs['image']):
 
             image_url = self.sign_and_post_s3(kwargs['image'])
 
-            if image_url != None:
+            if image_url is not None:
                 payload.update({'image': image_url})
 
         response = requests.post(resource, headers=self.token, json=payload)
@@ -41,26 +42,26 @@ class Api:
 
     def get_blogpost(self, id):
 
-        resource = API_URL + f'/blogposts/{id}'
+        resource = self.API_URL + f'/blogposts/{id}'
         response = requests.get(resource, headers=self.token)
 
         return response.json()
 
     def get_blogposts(self):
 
-        resource = API_URL + '/blogposts'
+        resource = self.API_URL + '/blogposts'
         response = requests.get(resource, headers=self.token)
         return response.json()
 
     def update_blogpost(self, id, **kwargs):
 
-        resource = API_URL + f'/blogposts/{id}/update'
+        resource = self.API_URL + f'/blogposts/{id}/update'
         payload = {'title': kwargs['title'], 'body': kwargs['body']}
 
         if 'image' in kwargs and os.path.exists(kwargs['image']):
 
             image_url = self.sign_and_post_s3(kwargs['image'])
-            if image_url != None:
+            if image_url is not None:
                 payload.update({'image': image_url})
 
         if payload != {}:
@@ -70,7 +71,7 @@ class Api:
 
     def delete_blogpost(self, id):
 
-        resource = API_URL + f'/blogposts/{id}/delete'
+        resource = self.API_URL + f'/blogposts/{id}/delete'
         response = requests.delete(resource, headers=self.token)
 
         return response.json()
@@ -79,7 +80,7 @@ class Api:
 
         file_name = file_path.split('/')[-1]
 
-        resource = API_URL + f'/sign_s3/{file_name}'
+        resource = self.API_URL + f'/sign_s3/{file_name}'
         response = requests.get(resource, headers=self.token)
 
         if response.status_code == requests.codes.ok:

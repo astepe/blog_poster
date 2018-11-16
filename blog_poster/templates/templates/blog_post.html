@@ -1,12 +1,11 @@
 {% extends 'base.html' %}
 
 {% block current %}
-  <a style="font-family: courier new" class="nav-item nav-link" href="https://docs.python.org">Blog</a>
-  <a style="font-family: courier new" class="nav-item nav-link" href="https://docs.python.org">Projects</a>
+<div class="navlink"><a href="#">Blog</a></div>
+<div class="navlink"><a href="#">Projects</a></div>
 {% endblock %}
 
 
 {% block content %}
-  <h1>This the preview template!</h1>
-  <p>{{text}}</p>
+  <p>{{text|safe}}</p>
 {% endblock %}

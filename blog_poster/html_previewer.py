@@ -1,10 +1,13 @@
 from selenium import webdriver
-from blog_poster.filters import blog_filter
+from blog_poster.blog_filter import blog_filter
 from blog_poster import jinja_env
-import os
+from urllib.parse import quote
 
 
 class PreviewWindow():
+    """
+    for html previewing upon typing into text editor
+    """
 
     def __init__(self, raw_text='enter text to see preview!'):
 
@@ -16,8 +19,11 @@ class PreviewWindow():
 
         self.raw_text = raw_text
 
-        html_body = blog_filter(raw_text)
+        html = blog_filter(raw_text)
 
         template = jinja_env.get_template('blog_post.html')
 
-        self.window.get("data:text/html;charset=utf-8," + template.render(text=html_body))
+        self.window.get("data:text/html;charset=utf-8," +
+                        quote(template.render(text=html)))
+
+        return html

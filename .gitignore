@@ -1,0 +1,11 @@
+filters.py
+geckodriver.log
+build/*
+blog_poster.spec
+blog_poster/__pycache__/
+blog_poster/templates/__pycache__/
+.pytest_cache
+*.pyc
+dist/*
+*.spec
+*.log

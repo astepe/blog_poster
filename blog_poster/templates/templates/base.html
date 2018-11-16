@@ -1,47 +1,175 @@
 <!DOCTYPE html>
 <html>
   <head>
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
-    <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
-    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
-
+    <link rel="stylesheet" href="/css/master.css">
+    <link rel="icon" href="https://s3.us-east-2.amazonaws.com/ari-blog-assets/me_Mp7_icon.ico" type="image/x-icon">
     <meta charset="utf-8">
-  </head>
+    <style>
+    a:active, a:focus {
+        outline: 0;
+        border: none;
+        -moz-outline-style: none;
+    }
+    body {
+      margin-left: 25px;
+      margin-right: 25px;
+      display: grid;
+      grid-template-columns: 1fr minmax(auto, 1200px) 1fr;
+    }
+    .item p {
+      margin: 0 0 5px 0;
+    }
+    a {
+      text-decoration: none;
+      color: #646464;
+    }
+    a:hover {
+      color: #306998;
+    }
+    .header-line {
+      background-color: #FFD43B;
+      width: 100%;
+      height: 7px;
+      position: absolute;
+      top: 0;
+      left: 0;
+    }
+    .container {
+      display: grid;
+      grid-column-start: 2;
+    }
+    .navbar{
+      display: grid;
+      grid-gap: 20px;
+      grid-row-gap: 5px;
+      grid-template-rows: 75px 5px;
+      grid-template-columns: 2fr repeat(4, auto);
+    }
+    .navlink {
+      display: grid;
+      justify-content: center;
+      align-items: center;
+      font-size: 15px;
+      font-family: courier new;
+    }
+    .header {
+      justify-content: left;
+      align-items: center;
+    }
+    .header-title {
+      font-size: 20px;
+      font-family: Verdana;
+      margin-bottom: 0;
+    }
+    .header-subtitle {
+      font-size: 15px;
+      font-family: courier new;
+      color: #4B8BBE;
+      margin-top: .25rem;
+    }
+    .introduction {
+      font-family: courier new;
+      display: grid;
+      height: 500px;
+      align-items: center;
+    }
+    .underline {
+      display: grid;
+      background-color: #306998;
+      grid-column: span 5;
+      grid-row-gap: 0px;
+    }
+    h1 {
+      font-family: Avant Garde, Avantgarde, Century Gothic, CenturyGothic, AppleGothic, sans-serif;
+      font-size: 24px;
+      font-style: normal;
+      font-variant: normal;
+      font-weight: 700;
+      line-height: 26.4px;
+    }
+    h3 {
+      font-family: Avant Garde, Avantgarde, Century Gothic, CenturyGothic, AppleGothic, sans-serif;
+      font-size: 20px;
+      font-style: normal;
+      font-variant: normal;
+      font-weight: 700;
+      line-height: 15.4px;
+    }
+    p, a {
+      font-family: Avant Garde, Avantgarde, Century Gothic, CenturyGothic, AppleGothic, sans-serif;
+      font-size: 14px;
+      font-style: normal;
+      font-variant: normal;
+      font-weight: 400;
+      line-height: 20px;
+    }
+    blockquote {
+      font-family: Avant Garde, Avantgarde, Century Gothic, CenturyGothic, AppleGothic, sans-serif;
+      font-size: 21px;
+      font-style: normal;
+      font-variant: normal;
+      font-weight: 400;
+      line-height: 30px;
+    }
+    pre {
+      padding: 7px 30px;
+      margin: 15px -30px;
+      line-height: 1.3;
+    }
+    textarea, code, pre {
+      font-family: 'Consolas', 'Menlo', 'Deja Vu Sans Mono', 'Bitstream Vera Sans Mono', monospace !important;
+      font-size: 15px;
+      background: #eee;
+    }
+    .blog {
+      display: grid;
+      padding-top: 20px;
+      padding-left: 100px;
+      padding-right: 100px;
+    }
+    .blog-image {
+      display: grid;
+      top: 0;
+      left: 0;
+      width: 100%;
+      margin: auto;
+    }
+    .k, .ow {
+      color: #004461;
+      font-weight: bold;
+    }
+    .mi {
+      color: hsl( 29, 54%, 61%);
+    }
+    .s2, .s1 {
+      color: #4e9a06;
+    }
+    .nd {
+      color: #888888;
+    }
+</style>
+</head>
 
   <body>
 
     <div class="header-line"></div>
-
-
     <div class="container">
-      <nav id="navbar" class="navbar navbar-expand-lg navbar-light">
-        <div>
-          <a style="font-family: courier new" class="navbar-brand header-title" href="https://docs.python.org">Aris Stepe</a>
-          <p class="header-subtitle" style="font-size: 1rem;">Python Developer</p>
+
+      <div class="navbar">
+        <div class="header">
+          <p class="header-title"><a href="#">Aris Stepe</a></p>
+          <p class="header-subtitle">Python Developer</p>
         </div>
-
-        <button class="navbar-toggler" type="button" data-toggle="collapse"  aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation">
-          <span class="navbar-toggler-icon"></span>
-        </button>
-        <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
-          <div class="navbar-nav">
-            {% block current %}
-
-            {% endblock %}
-            <a style="font-family: courier new" target="_blank" class="nav-item nav-link" href="https://www.linkedin.com/in/aris-stepe-877828159/">LinkedIn</a>
-            <a style="font-family: courier new" target="_blank" class="nav-item nav-link" href="https://github.com/astepe">GitHub</a>
-          </div>
-        </div>
-      </nav>
-    </div>
-
-
-      <div class="container">
-        {% block content %}
+        {% block current %}
 
         {% endblock %}
+        <div class="navlink"><a target="_blank" href="https://www.linkedin.com/in/aris-stepe-877828159/">LinkedIn</a></div>
+        <div class="navlink"><a target="_black" href="https://github.com/astepe">GitHub</a></div>
+        <div class="underline"></div>
       </div>
+    {% block content %}
 
+    {% endblock %}
+  </div>
   </body>
 </html>

@@ -1,10 +1,12 @@
 from tkinter import *
 from tkinter import filedialog, ttk
 from ttkthemes import themed_tk as tk
+from tkinterhtml import HtmlFrame
 from blog_poster.controller import Api
 from datetime import datetime
-import os, time
+import os
 from blog_poster.html_previewer import PreviewWindow
+
 
 BASEDIR = os.path.abspath(os.path.dirname(__file__))
 
@@ -23,12 +25,15 @@ class Login:
 
         self.logo = PhotoImage(file=BASEDIR + "/blogposterlogo.png")
         ttk.Label(self.frame, image=self.logo).pack()
-        self.username_label = ttk.Label(self.frame, text='Username', font='Courier 15', padding=3)
+        self.username_label = ttk.Label(self.frame, text='Username',
+                                        font='Courier 15', padding=3)
         self.username_field = ttk.Entry(self.frame, font="Courier")
-        self.password_label = ttk.Label(self.frame, text='Password', font='Courier 15', padding=3)
+        self.password_label = ttk.Label(self.frame, text='Password',
+                                        font='Courier 15', padding=3)
         self.password_field = ttk.Entry(self.frame, font="Courier", show='*')
 
-        self.login_button = ttk.Button(self.frame, text='Login', width=25, command=self.login)
+        self.login_button = ttk.Button(self.frame, text='Login',
+                                       width=25, command=self.login)
 
         self.username_label.pack()
         self.username_field.pack()
@@ -41,7 +46,7 @@ class Login:
         self.login_button.pack()
         self.frame.pack()
 
-    def login(self, event):
+    def login(self, *args):
 
         username = self.username_field.get()
         password = self.password_field.get()
@@ -57,7 +62,6 @@ class Login:
 
         self.master.destroy()
         ListPosts(api)
-
 
 
 class ListPosts:
@@ -149,31 +153,31 @@ class Edit:
         self.title_frame = ttk.Frame(self.master)
         self.title_label = ttk.Label(self.title_frame, text='Title:', font='Courier')
         self.title_field = ttk.Entry(self.title_frame, font="Courier")
+
         self.body_frame = ttk.Frame(self.master)
         self.body_label = ttk.Label(self.body_frame, text='Body:', font='Courier')
         self.body_field = Text(self.body_frame)
+
         self.pic_frame = ttk.Frame(self.master)
         self.pic_label = ttk.Label(self.pic_frame, text='Image:', font='Courier')
         self.pic_field = ttk.Entry(self.pic_frame, font="Courier")
 
-
         # if editing a pre-existing post, populate text into fields
         if 'blogpost' in kwargs:
-
             self.blogpost = kwargs['blogpost']
-            self.html_preview = PreviewWindow(self.blogpost['body'])
+            self.preview = PreviewWindow(self.blogpost['body'])
             self.title_field.insert(0, self.blogpost['title'])
             self.body_field.insert(END, self.blogpost['body'])
             self.pic_field.insert(0, (self.blogpost['image']))
         else:
-            self.html_preview = PreviewWindow()
+            self.preview = PreviewWindow()
 
         def onclick(event):
             event.widget.focus_set()
 
         def keyrelease(event):
-            text = event.widget.get(1.0, END)
-            self.html_preview.update_preview(text)
+            raw_text = event.widget.get(1.0, END)
+            self.preview.update_preview(raw_text)
 
         self.body_field.bind("<KeyRelease>", keyrelease)
         self.body_field.bind('<Button-1>', onclick)
@@ -184,10 +188,10 @@ class Edit:
                                       command=self.send_blogpost)
 
         self.cancel_button = ttk.Button(self.button_frame, text='Cancel',
-                                        command=self.master.destroy)
+                                        command=self.reset_parent)
 
         self.pic_button = ttk.Button(self.pic_frame, text='Import Image',
-                                 command=self.open_image)
+                                     command=self.open_image)
 
         # pack all elements into frame
         self.title_label.pack(side='left', ipadx=5, ipady=8)
@@ -222,6 +226,7 @@ class Edit:
 
         self.master.destroy()
         self.parent.post_frame.destroy()
+        self.preview.window.quit()
         self.parent.show_posts()
 
     def open_image(self):
