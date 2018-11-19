@@ -29,7 +29,7 @@
     .header-line {
       background-color: #FFD43B;
       width: 100%;
-      height: 7px;
+      height: 5px;
       position: absolute;
       top: 0;
       left: 0;
@@ -58,7 +58,7 @@
     }
     .header-title {
       font-size: 20px;
-      font-family: Verdana;
+      font-family: courier new;
       margin-bottom: 0;
     }
     .header-subtitle {
@@ -81,7 +81,7 @@
     }
     h1 {
       font-family: Avant Garde, Avantgarde, Century Gothic, CenturyGothic, AppleGothic, sans-serif;
-      font-size: 24px;
+      font-size: 30px;
       font-style: normal;
       font-variant: normal;
       font-weight: 700;
@@ -97,24 +97,47 @@
     }
     p, a {
       font-family: Avant Garde, Avantgarde, Century Gothic, CenturyGothic, AppleGothic, sans-serif;
-      font-size: 14px;
+      font-size: 20px;
       font-style: normal;
       font-variant: normal;
       font-weight: 400;
-      line-height: 20px;
+      line-height: 1.6;
     }
     blockquote {
+      display: grid;
+      grid-template-columns: 7px auto;
+      grid-column-gap: 15px;
       font-family: Avant Garde, Avantgarde, Century Gothic, CenturyGothic, AppleGothic, sans-serif;
-      font-size: 21px;
-      font-style: normal;
+      font-style: italic;
       font-variant: normal;
       font-weight: 400;
       line-height: 30px;
+      margin-right: 40px;
+      margin-top: 40px;
+      margin-bottom: 40px;
+      margin-left: 0px;
+    }
+    blockquote::before {
+      content: “\201C”;
+      display: block;
+      font-size: 20px;
+      height: 0;
+      left: -20px;
+      position: relative;
+      top: -10px;
+    }
+    .quote-bar {
+      background-color: #306998;
+    }
+    .highlight {
+      display: grid;
+      grid-template-columns: 1fr;
     }
     pre {
       padding: 7px 30px;
       margin: 15px -30px;
       line-height: 1.3;
+      overflow: auto;
     }
     textarea, code, pre {
       font-family: 'Consolas', 'Menlo', 'Deja Vu Sans Mono', 'Bitstream Vera Sans Mono', monospace !important;
@@ -123,15 +146,15 @@
     }
     .blog {
       display: grid;
-      padding-top: 20px;
-      padding-left: 100px;
-      padding-right: 100px;
+      grid-template-rows: auto;
+      padding-top: 75px;
+      padding-left: 200px;
+      padding-right: 200px;
     }
     .blog-image {
-      display: grid;
-      top: 0;
-      left: 0;
       width: 100%;
+      height: 250px;
+      object-fit: cover;
       margin: auto;
     }
     .k, .ow {
@@ -147,7 +170,7 @@
     .nd {
       color: #888888;
     }
-</style>
+    </style>
 </head>
 
   <body>
@@ -158,7 +181,7 @@
       <div class="navbar">
         <div class="header">
           <p class="header-title"><a href="#">Aris Stepe</a></p>
-          <p class="header-subtitle">Python Developer</p>
+          <p class="header-subtitle">Web Developer</p>
         </div>
         {% block current %}
 
