@@ -154,9 +154,13 @@ class Edit:
         self.title_label = ttk.Label(self.title_frame, text='Title:', font='Courier')
         self.title_field = ttk.Entry(self.title_frame, font="Courier")
 
+        self.summary_frame = ttk.Frame(self.master)
+        self.summary_label = ttk.Label(self.summary_frame, text='Summary:', font='Courier')
+        self.summary_field = Text(self.summary_frame, height=5)
+
         self.body_frame = ttk.Frame(self.master)
         self.body_label = ttk.Label(self.body_frame, text='Body:', font='Courier')
-        self.body_field = Text(self.body_frame)
+        self.body_field = Text(self.body_frame, font=("Avantgarde", 15))
 
         self.pic_frame = ttk.Frame(self.master)
         self.pic_label = ttk.Label(self.pic_frame, text='Image:', font='Courier')
@@ -168,6 +172,7 @@ class Edit:
             self.preview = PreviewWindow(self.blogpost['body'])
             self.title_field.insert(0, self.blogpost['title'])
             self.body_field.insert(END, self.blogpost['body'])
+            self.summary_field.insert(END, self.blogpost['summary'])
             self.pic_field.insert(0, (self.blogpost['image']))
         else:
             self.preview = PreviewWindow()
@@ -201,6 +206,9 @@ class Edit:
         self.pic_field.pack(side='left')
         self.pic_button.pack()
         self.pic_frame.pack()
+        self.summary_label.pack()
+        self.summary_field.pack()
+        self.summary_frame.pack()
         self.body_label.pack()
         self.body_field.pack()
         self.body_frame.pack()
@@ -212,13 +220,14 @@ class Edit:
 
         title = self.title_field.get()
         body = self.body_field.get(1.0, END)
+        summary = self.summary_field.get(1.0, END)
         image = self.pic_field.get()
 
         try:
             id = self.blogpost['id']
-            self.api.update_blogpost(id, title=title, body=body, image=image)
+            self.api.update_blogpost(id, title=title, body=body, summary=summary, image=image)
         except:
-            self.api.create_blogpost(title=title, body=body, image=image)
+            self.api.create_blogpost(title=title, body=body, summary=summary, image=image)
 
         self.reset_parent()
 
