@@ -10,11 +10,17 @@ class Api:
     controls outgoing and incoming api requests
     """
 
-    def __init__(self, username, password):
 
+    def __init__(self, username, password):
         self.API_URL = os.environ.get('API_URL')
+        self.username = username
+        self.password = password
+        self.get_token()
+
+    def get_token(self):
+
         response = requests.post(self.API_URL + '/tokens',
-                                 auth=HTTPBasicAuth(username, password)).json()
+                                 auth=HTTPBasicAuth(self.username, self.password)).json()
 
         if 'error' in response:
             self.token = None
@@ -25,10 +31,10 @@ class Api:
 
         return(str(self.token))
 
-    def create_blogpost(self, title, body, **kwargs):
+    def create_blogpost(self, title, body, summary, **kwargs):
 
         resource = self.API_URL + '/blogposts/create'
-        payload = {'title': title, 'body': body}
+        payload = {'title': title, 'body': body, 'summary': summary}
 
         if 'image' in kwargs and os.path.exists(kwargs['image']):
 
@@ -38,12 +44,21 @@ class Api:
                 payload.update({'image': image_url})
 
         response = requests.post(resource, headers=self.token, json=payload)
-        return response
+
+        if 'error' in response.json():
+            self.get_token()
+            response = requests.post(resource, headers=self.token, json=payload)
+
+        return response.json()
 
     def get_blogpost(self, id):
 
         resource = self.API_URL + f'/blogposts/{id}'
         response = requests.get(resource, headers=self.token)
+
+        if 'error' in response.json():
+            self.get_token()
+            response = requests.get(resource, headers=self.token)
 
         return response.json()
 
@@ -51,12 +66,17 @@ class Api:
 
         resource = self.API_URL + '/blogposts'
         response = requests.get(resource, headers=self.token)
+
+        if 'error' in response.json():
+            self.get_token()
+            response = requests.get(resource, headers=self.token)
+
         return response.json()
 
     def update_blogpost(self, id, **kwargs):
 
         resource = self.API_URL + f'/blogposts/{id}/update'
-        payload = {'title': kwargs['title'], 'body': kwargs['body']}
+        payload = {'title': kwargs['title'], 'body': kwargs['body'], 'summary': kwargs['summary']}
 
         if 'image' in kwargs and os.path.exists(kwargs['image']):
 
@@ -67,12 +87,21 @@ class Api:
         if payload != {}:
 
             response = requests.put(resource, headers=self.token, json=payload)
+
+            if 'error' in response.json():
+                self.get_token()
+                response = requests.put(resource, headers=self.token, json=payload)
+
             return response.json()
 
     def delete_blogpost(self, id):
 
         resource = self.API_URL + f'/blogposts/{id}/delete'
         response = requests.delete(resource, headers=self.token)
+
+        if 'error' in response.json():
+            self.get_token()
+            response = requests.delete(resource, headers=self.token)
 
         return response.json()
 
@@ -82,6 +111,12 @@ class Api:
 
         resource = self.API_URL + f'/sign_s3/{file_name}'
         response = requests.get(resource, headers=self.token)
+
+        if 'error' in response.json():
+            self.get_token()
+            response = requests.get(resource, headers=self.token)
+
+        print(response)
 
         if response.status_code == requests.codes.ok:
 
