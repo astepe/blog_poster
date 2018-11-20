@@ -13,17 +13,23 @@ class PreviewWindow():
 
         self.window = webdriver.Firefox()
         self.raw_text = raw_text
-        self.update_preview(self.raw_text)
+
+        self.update_preview(raw_text)
 
     def update_preview(self, raw_text):
 
-        self.raw_text = raw_text
+        y_offset = self.window.execute_script('return window.pageYOffset')
 
+        self.raw_text = raw_text
         html = blog_filter(raw_text)
 
         template = jinja_env.get_template('blog_post.html')
 
         self.window.get("data:text/html;charset=utf-8," +
                         quote(template.render(text=html)))
+
+        js_script = f'window.scrollTo(0, {y_offset})'
+
+        self.window.execute_script(js_script)
 
         return html
