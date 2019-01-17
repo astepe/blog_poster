@@ -10,8 +10,6 @@ Blog Poster is a simple GUI that allows the user to create and edit blog posts o
 
 **Comprehensive Text Editor** - Provides user with standard font styles and formats along with the ability to insert quotes, links, images, etc.
 
-**HTML Previewer** - Dynamically renders an html page as the user types to provide a visual preview for the user.
-
 **Drafts** - A simple way to save drafts locally for future editing or posting.
 
 ## Built With
