@@ -4,11 +4,13 @@ Blog Poster is a simple GUI that allows the user to create and edit blog posts o
 
 ![alt text](https://raw.githubusercontent.com/astepe/blog_poster/master/blogposterdemo.gif)
 
+## Features
+
+**Custom Markdown to HTML renderer** - Provides user with the ability to write posts in markdown format and have the resulting html dynamically render in a separate window.
+
 ## Future Functionality
 
 **Offline Mode** - create posts off line without the need for authentication
-
-**Comprehensive Text Editor** - Provides user with standard font styles and formats along with the ability to insert quotes, links, images, etc.
 
 **Drafts** - A simple way to save drafts locally for future editing or posting.
 
