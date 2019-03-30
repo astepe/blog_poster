@@ -2,7 +2,7 @@
 
 Blog Poster is a simple GUI that allows the user to create and edit blog posts on their personal blog site.
 
-![alt text](https://raw.githubusercontent.com/astepe/blog_poster/master/blogposterdemo.gif)
+![alt text](https://raw.githubusercontent.com/astepe/blog_poster/master/blogposter.gif)
 
 ## Features
 
