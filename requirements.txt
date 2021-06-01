@@ -16,4 +16,4 @@ selenium==3.141.0
 six==1.11.0
 tkinterhtml==0.7
 ttkthemes==2.2.0
-urllib3==1.24.1
+urllib3==1.26.5
